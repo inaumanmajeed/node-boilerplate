@@ -1,5 +1,6 @@
 const userModel = require('../Model/user');
 
+//function to show all users
 const getAllUsers = async (req, res) => {
     try {
         const allUsers = await userModel.find({});
@@ -17,6 +18,7 @@ const getAllUsers = async (req, res) => {
     }
 };
 
+//function to show user by ID
 const getUser = async (req, res) => {
     try {
         const getUser = await userModel.findById(req.params.id);
@@ -34,6 +36,7 @@ const getUser = async (req, res) => {
     }
 };
 
+//function to update user data by id
 const updateUser = async (req, res) => {
     try {
         const updateUser = await userModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -51,6 +54,7 @@ const updateUser = async (req, res) => {
     }
 };
 
+//function to delete a user by id
 const deleteUser = async (req, res) => {
     try {
         await userModel.findByIdAndDelete(req.params.id);
@@ -67,6 +71,7 @@ const deleteUser = async (req, res) => {
     }
 };
 
+//function to create new user
 const postUser = async (req, res) => {
     try {
         const userData = await userModel.create(req.body);
