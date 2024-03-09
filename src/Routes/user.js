@@ -2,7 +2,6 @@ const userController =require( "../Controller/user")
 const express =require( "express");
 const router = express.Router();
 
-
 router.get("/", userController.getAllUsers); //show all users data
 router.post("/", userController.postUser); //create new user data
 router.get("/:id", userController.getUser); //show user data by id

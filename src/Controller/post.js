@@ -1,6 +1,5 @@
 const postModel = require("../Model/post");
 
-
 // function to show all posts
 const getAllPosts = async(req, res) => {
     try {
