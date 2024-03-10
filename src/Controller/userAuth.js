@@ -14,7 +14,7 @@ const register = async (req, res) => {
             });
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        user = new userModel({
+        const newUser = new userModel({
             name, 
             userId, 
             password: hashedPassword,
@@ -22,7 +22,7 @@ const register = async (req, res) => {
             permissions
 
         });
-        await user.save();
+        await newUser.save();
         res.status(200).json({
             message: "user registered successfully"
         });
