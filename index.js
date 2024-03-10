@@ -1,6 +1,7 @@
 const Express  =require("express");
 const userRouter =require("./src/Routes/user.js");
 const postRouter = require ("./src/Routes/post.js");
+const authRouter = require ("./src/Routes/userAuth.js");
 const mongoose = require("mongoose");
 
 const PORT = 3000;
@@ -25,6 +26,7 @@ app.use(Express.json({limit:'1000mb'}));
 // User Routes creation
 app.use("/user", userRouter);
 app.use("/post", postRouter);
+app.use("/auth", postRouter);
 
 
 // route-check route
@@ -37,4 +39,4 @@ app.use("/health", function(req, res){
 // Listening on Port
 app.listen(PORT, function(){
     console.log("Server is up and running at PORT 3000")
-})
+});
