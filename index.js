@@ -1,5 +1,5 @@
-const Express  =require("express");
-const userRouter =require("./src/Routes/user.js");
+const Express  = require("express");
+const userRouter = require("./src/Routes/user.js");
 const postRouter = require ("./src/Routes/post.js");
 const authRouter = require ("./src/Routes/userAuth.js");
 const mongoose = require("mongoose");
@@ -26,7 +26,7 @@ app.use(Express.json({limit:'1000mb'}));
 // User Routes creation
 app.use("/user", userRouter);
 app.use("/post", postRouter);
-app.use("/auth", postRouter);
+app.use("/auth", authRouter);
 
 
 // route-check route
