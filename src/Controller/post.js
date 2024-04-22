@@ -57,7 +57,7 @@ const updatePost = async (req, res) => {
 // function to get post by id
 const getPostById = async(req, res) => {
     try {
-        const postByIdData = await postModel.findById(req.param.id);
+        const postByIdData = await postModel.findById(req.params.id);
         res.status(200).json({
             success: true,
             message: "post fetched",
