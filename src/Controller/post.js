@@ -1,9 +1,9 @@
-const postModel = require("../Model/post");
+import { find, create, findByIdAndUpdate, findById, findByIdAndDelete } from "../Model/post";
 
 // function to show all posts
 const getAllPosts = async(req, res) => {
     try {
-        const allPosts = await postModel.find({});
+        const allPosts = await find({});
         res.status(200).json({
             success: true,
             message: "All posts data",
@@ -21,7 +21,7 @@ const getAllPosts = async(req, res) => {
 // function to create new post
 const createPost = async(req, res) => {
     try {
-        const postData = await postModel.create(req.body);
+        const postData = await create(req.body);
         res.status(200).json({
             success: true,
             message: "Posted",
@@ -39,7 +39,7 @@ const createPost = async(req, res) => {
 // function to update post
 const updatePost = async (req, res) => {
     try {
-        const updateData = await postModel.findByIdAndUpdate(req.param.body, req.body, {new: true});
+        const updateData = await findByIdAndUpdate(req.param.body, req.body, {new: true});
         res.status(200).json({
             success: true,
             message: "Post updated",
@@ -57,7 +57,7 @@ const updatePost = async (req, res) => {
 // function to get post by id
 const getPostById = async(req, res) => {
     try {
-        const postByIdData = await postModel.findById(req.params.id);
+        const postByIdData = await findById(req.params.id);
         res.status(200).json({
             success: true,
             message: "post fetched",
@@ -75,7 +75,7 @@ const getPostById = async(req, res) => {
 // function to delete post
 const deletePost = async(req, res) => {
     try {
-        const deleteData = await postModel.findByIdAndDelete(req.param.id);
+        const deleteData = await findByIdAndDelete(req.param.id);
         res.status(200).json({
             success: true,
             message: "Post deleted"
@@ -90,4 +90,4 @@ const deletePost = async(req, res) => {
 };
 
 
-module.exports = {getAllPosts, createPost, updatePost, getPostById, deletePost}
+export default {getAllPosts, createPost, updatePost, getPostById, deletePost}

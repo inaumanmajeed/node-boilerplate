@@ -1,8 +1,8 @@
-const Express  = require("express");
-const userRouter = require("./src/Routes/user.js");
-const postRouter = require ("./src/Routes/post.js");
-const authRouter = require ("./src/Routes/userAuth.js");
-const mongoose = require("mongoose");
+import Express, { json } from "express";
+import userRouter from "./src/Routes/user.js";
+import postRouter from "./src/Routes/post.js";
+import authRouter from "./src/Routes/userAuth.js";
+import { connect } from "mongoose";
 
 const PORT = 3000;
 const app = Express();
@@ -10,7 +10,7 @@ const app = Express();
 //MongoDB server conection
 
 let server;
-mongoose.connect("mongodb://localhost:27017").then(()=>{
+connect("mongodb://localhost:27017").then(()=>{
     console.log("mongodb connected");
 })
 
@@ -20,7 +20,7 @@ app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
     next();
 });
-app.use(Express.json({limit:'1000mb'}));
+app.use(json({limit:'1000mb'}));
 
 
 // User Routes creation
@@ -38,5 +38,5 @@ app.use("/health", function(req, res){
 
 // Listening on Port
 app.listen(PORT, function(){
-    console.log("Server is up and running at PORT 3000")
+    console.log(`Server is up and running at PORT ${PORT}`)
 });

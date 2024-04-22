@@ -1,12 +1,11 @@
-const userController =require( "../Controller/user")
-const express =require( "express");
-const router = express.Router();
+import { getAllUsers, getUser, updateUser, deleteUser, postUser } from "../Controller/user";
+import { Router } from "express";
+const router = Router();
 
-router.get("/", userController.getAllUsers); //show all users data
-router.post("/", userController.postUser); //create new user data
-router.get("/:id", userController.getUser); //show user data by id
-router.patch("/:id", userController.updateUser); //update user by id
-router.delete("/:id", userController.deleteUser); //delete user by id
+router.get("/", getAllUsers); // show all users data
+router.post("/", postUser); // create new user data
+router.get("/:id", getUser); // show user data by id
+router.patch("/:id", updateUser); // update user by id
+router.delete("/:id", deleteUser); // delete user by id
 
-
-module.exports = router;
+export default router;

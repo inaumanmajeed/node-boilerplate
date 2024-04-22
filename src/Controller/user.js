@@ -1,9 +1,9 @@
-const userModel = require('../Model/user');
+import { find, findById, findByIdAndUpdate, findByIdAndDelete, create } from '../Model/user';
 
 //function to show all users
-const getAllUsers = async (req, res) => {
+async function getAllUsers(req, res) {
     try {
-        const allUsers = await userModel.find({});
+        const allUsers = await find({});
         res.status(200).json({
             success: true,
             message: "All Users data",
@@ -16,12 +16,12 @@ const getAllUsers = async (req, res) => {
             error: error.message
         });
     }
-};
+}
 
 //function to show user by ID
 const getUser = async (req, res) => {
     try {
-        const getUser = await userModel.findById(req.params.id);
+        const getUser = await findById(req.params.id);
         res.status(200).json({
             success: true,
             message: "User data",
@@ -39,7 +39,7 @@ const getUser = async (req, res) => {
 //function to update user data by id
 const updateUser = async (req, res) => {
     try {
-        const updateUser = await userModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updateUser = await findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.status(200).json({
             success: true,
             message: "User data updated",
@@ -57,7 +57,7 @@ const updateUser = async (req, res) => {
 //function to delete a user by id
 const deleteUser = async (req, res) => {
     try {
-        await userModel.findByIdAndDelete(req.params.id);
+        await findByIdAndDelete(req.params.id);
         res.status(200).json({
             success: true,
             message: "User data deleted"
@@ -74,7 +74,7 @@ const deleteUser = async (req, res) => {
 //function to create new user
 const postUser = async (req, res) => {
     try {
-        const userData = await userModel.create(req.body);
+        const userData = await create(req.body);
         res.status(200).json({
             success: true,
             message: "User data inserted",
@@ -89,4 +89,4 @@ const postUser = async (req, res) => {
     }
 };
 
-module.exports = { getAllUsers, getUser, updateUser, deleteUser, postUser };
+export default { getAllUsers, getUser, updateUser, deleteUser, postUser };

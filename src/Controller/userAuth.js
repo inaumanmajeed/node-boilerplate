@@ -1,18 +1,18 @@
-const userModel = require ("../Model/userAuth");
-const bcrypt = require ("bcrypt");
+import { findOne, create } from "../Model/userAuth";
+import { hash, compare } from "bcrypt";
 
 
 // router.post("/register", authController.register);
 const register = async (req, res) => {
     try {
         const {name, userId, password, description, permissions} = req.body;
-        let user = await userModel.findOne({userId});
+        let user = await findOne({userId});
         if (user) {
             return res.status(500).json({
                 message: "User already exists"
             });
         }
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await hash(password, 10);
         req.body.password = hashedPassword;
         // const newUser = new userModel({       
         //     name, 
@@ -23,7 +23,7 @@ const register = async (req, res) => {
         // });
 
         // await newUser.save();
-        const userAdd = userModel.create(req.body);
+        const userAdd = create(req.body);
         res.status(200).json({
             success: true,
             message: "user registered successfully",
@@ -42,12 +42,12 @@ const login = async (req, res) => {
     try {
         const { userId, password } = req.body;
 
-        const user = await userModel.findOne({ userId });
+        const user = await findOne({ userId });
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        const passwordMatch = await bcrypt.compare(password, user.password);
+        const passwordMatch = await compare(password, user.password);
         if (!passwordMatch) {
             return res.status(401).json({ message: "Invalid credentials" });
         }
@@ -67,6 +67,6 @@ const logout = async (req, res) => {
 };
 
 
-module.exports = {register,
+export default {register,
 login,
 logout};
